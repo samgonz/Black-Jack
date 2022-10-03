@@ -67,11 +67,18 @@ while game_over == False:
     print(f'You total {sum(users_hand)}, Your hand is now {users_hand}.\n')
     
     if sum(users_hand) > 21:
-        """If user hits and they get over 21, end the game.
+        """If user hits and they get over 21, end the game unless they had an ace.
         """        
-        game_over == True
-        print(f'Game Over, you busted with {sum(users_hand)}.\n')
-        break
+        if 11 in users_hand:
+            """if user had an ace and they busted, remove the 11 and exchange it for a 1
+            since aces are both 11 and 1.
+            """            
+            users_hand.remove(11)
+            users_hand.append(1)
+        else:
+            game_over == True
+            print(f'Game Over, you busted with {sum(users_hand)}.\n')
+            break
     
     continue_hand = input('Would you like to [hit], [hold] or [fold]?\n')
     
